@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Check we are in docroot and bootstrap theme exists.
 if [ ! -d "themes/contrib/bootstrap" ]; then
   echo "This must be run from Drupal docroot.";
   echo "This script assumes this path exists:  themes/contrib/bootstrap";
@@ -26,27 +27,28 @@ bootstrap_subtheme_enter_theme_name() {
   fi
 }
 
+# Ensure machine_name.
 machine_name=$1;
 if [ -z "$machine_name" ]; then
   bootstrap_subtheme_enter_machine_name
 fi
 
+# Ensure theme_title.
 theme_title=$2;
 if [ -z "$theme_title" ]; then
   bootstrap_subtheme_enter_theme_name
 fi
-
 
 # Make a subtheme from bootstrap core.
 mkdir -p themes/custom
 cp themes/contrib/bootstrap/starterkits/cdn themes/custom/"$machine_name" -af
 find ./themes/custom/"$machine_name"/ -name "*.yml" -type f -exec sed -i "s/THEMENAME/$machine_name/g" {} \;
 find ./themes/custom/"$machine_name"/ -name "*.yml" -type f -exec sed -i "s/THEMETITLE/$theme_title/g" {} \;
-#find ./ -name "THEMENAME.*" -type f -exec mv "$file" `echo "$file" | sed s/foo/bar/g` {} \;
 
 # Rename THEMENAME.files
 echo "Renaming THEMENAME.* files to $machine_name.*:";
 #echo `find ./themes/custom/"$machine_name"/ -name "THEMENAME.*" -type f`;
+
 # This comes close to working, but the $machine_name var is lost in the new bash session.
 #find ./themes/custom/"$machine_name"/ -depth -name "THEMENAME.*" -type f -exec bash -c 'mv "$1" `echo "$1" | sed s/THEMENAME/"$machine_name"/g`' bash {} \;
 
