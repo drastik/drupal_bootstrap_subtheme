@@ -10,7 +10,7 @@ fi
 # Prompts for the sitename.com if not entered.
 bootstrap_subtheme_enter_machine_name() {
   echo "Requires theme machine_name and Title. Example:"
-  echo "bootstrap_subtheme my_theme 'My Theme'"
+  echo "bootstrap_subtheme my_theme 'My Theme' starterkit"
   read -r -p "Enter [machine_name]: " machine_name
   if [ -z "$machine_name" ]; then
     bootstrap_subtheme_enter_machine_name
@@ -20,8 +20,8 @@ bootstrap_subtheme_enter_machine_name() {
 # Prompts for the sitename.com if not entered.
 bootstrap_subtheme_enter_theme_name() {
   echo "Requires theme machine_name and Title. Example:"
-  echo "bootstrap_subtheme my_theme 'My Theme'"
-  read -r -p "Enter ['My Theme Title']: " theme_title
+  echo "bootstrap_subtheme my_theme 'My Theme' starterkit"
+  read -r -p "Enter [My Theme Title] without quotes: " theme_title
   if [ -z "$theme_title" ]; then
     bootstrap_subtheme_enter_theme_name
   fi
@@ -30,8 +30,8 @@ bootstrap_subtheme_enter_theme_name() {
 # Kit choice.
 bootstrap_subtheme_enter_kit() {
   echo "Requires theme machine_name and Title. Example:"
-  echo "bootstrap_subtheme my_theme 'My Theme'"
-  read -r -p "Enter [kit] (ex: cdn, less, sass): " kit_selection
+  echo "bootstrap_subtheme my_theme 'My Theme' starterkit"
+  read -r -p "Enter [starterkit] (ex: cdn, less, sass): " kit_selection
   if [ -z "$kit_selection" ]; then
     bootstrap_subtheme_enter_kit
   fi
