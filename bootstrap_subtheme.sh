@@ -27,6 +27,16 @@ bootstrap_subtheme_enter_theme_name() {
   fi
 }
 
+# Kit choice.
+bootstrap_subtheme_enter_kit() {
+  echo "Requires theme machine_name and Title. Example:"
+  echo "bootstrap_subtheme my_theme 'My Theme'"
+  read -r -p "Enter [kit] (ex: cdn, less, sass): " kit_selection
+  if [ -z "$kit_selection" ]; then
+    bootstrap_subtheme_enter_kit
+  fi
+}
+
 # Ensure machine_name.
 machine_name=$1;
 if [ -z "$machine_name" ]; then
@@ -39,9 +49,15 @@ if [ -z "$theme_title" ]; then
   bootstrap_subtheme_enter_theme_name
 fi
 
+# Ensure kit selection.
+kit_selection=$3;
+if [ -z "$kit_selection" ]; then
+  bootstrap_subtheme_enter_kit
+fi
+
 # Make a subtheme from bootstrap core.
 mkdir -p themes/custom
-cp themes/contrib/bootstrap/starterkits/cdn themes/custom/"$machine_name" -af
+cp themes/contrib/bootstrap/starterkits/"$kit_selection" themes/custom/"$machine_name" -af
 find ./themes/custom/"$machine_name"/ -name "*.yml" -type f -exec sed -i "s/THEMENAME/$machine_name/g" {} \;
 find ./themes/custom/"$machine_name"/ -name "*.yml" -type f -exec sed -i "s/THEMETITLE/$theme_title/g" {} \;
 
