@@ -1,9 +1,8 @@
-The script is very basic, for my own needs.
+The script is very basic, for my own needs.  
 
+Run it from your Drupal webroot.  
 It makes a few assumptions:
 This script assumes these paths exist:  
-- themes/contrib/bootstrap/starterkits/cdn
+- themes/contrib/bootstrap/starterkits/cdn|sass|less
 - themes/custom/your_theme_name (will be created)
 
-It only copies the CDN version.  It would be easy to add a 3rd arugment to allow it to copy LESS or SASS.
-I just don't need those at the moment.
